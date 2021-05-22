@@ -1,5 +1,7 @@
 package com.renanmuniz.clients.services;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,6 +24,32 @@ public class ClientService {
 
 		return list.map(cli -> new ClientDTO(cli));
 	}
+	
+	@Transactional(readOnly = true)
+	public ClientDTO findById(Long id) {
+		Optional<Client> object = repository.findById(id);
+		
+		Client client = object.get();
+		
+		return new ClientDTO(client);
+	}
+	
+	@Transactional
+	public ClientDTO insert(ClientDTO dto) {
+		Client entity = new Client();
+		
+		entity.setName(dto.getName());
+		entity.setCpf(dto.getCpf());
+		entity.setIncome(dto.getIncome());
+		entity.setBirthDate(dto.getBirthDate());
+		entity.setChildren(dto.getChildren());
+		
+		entity = repository.save(entity);
+
+		return new ClientDTO(entity);
+	}
+
+	
 	
 	
 }
