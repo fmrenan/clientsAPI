@@ -3,6 +3,8 @@ package com.renanmuniz.clients.dto;
 import java.io.Serializable;
 import java.time.Instant;
 
+import com.renanmuniz.clients.entities.Client;
+
 public class ClientDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 
@@ -16,13 +18,13 @@ public class ClientDTO implements Serializable{
 	public ClientDTO() {
 	}
 
-	public ClientDTO(Long id, String name, String cpf, Double income, Integer children, Instant birthDate) {
-		this.id = id;
-		this.name = name;
-		this.cpf = cpf;
-		this.income = income;
-		this.children = children;
-		this.birthDate = birthDate;
+	public ClientDTO(Client client) {
+		this.id = client.getId();
+		this.name = client.getName();
+		this.cpf = client.getCpf();
+		this.income = client.getIncome();
+		this.children = client.getChildren();
+		this.birthDate = client.getBirthDate();
 	}
 
 	public Long getId() {
